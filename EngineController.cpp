@@ -2,39 +2,39 @@
 #include "Engine.hpp"
 #include "Gearbox.hpp"
 
-cEngineController::cEngineController(cEngine *apEngine) : mpEngine(apEngine){}
+cEngineController::cEngineController(/*cEngine *apEngine*/) = default; //: mpEngine(apEngine){}
 cEngineController::~cEngineController() = default;
 
-void cEngineController::StartEngine()
+void cEngineController::StartEngine(cEngine *apEngine)
 {
-	if(!mpEngine)
+	if(!apEngine)
 		return;
 	
-	mpEngine->Start();
+	apEngine->Start();
 };
 
-void cEngineController::StopEngine()
+void cEngineController::StopEngine(cEngine *apEngine)
 {
-	if(!mpEngine)
+	if(!apEngine)
 		return;
 	
-	mpEngine->Stop();
+	apEngine->Stop();
 };
 
-void cEngineController::RevEngine(float afThrottle)
+void cEngineController::RevEngine(cEngine *apEngine, float afThrottle)
 {
-	if(!mpEngine)
+	if(!apEngine)
 		return;
 	
-	mpEngine->Rev(afThrottle);
+	apEngine->Rev(afThrottle);
 };
 
-void cEngineController::SetGear(int anGear)
+void cEngineController::SetGear(cEngine *apEngine, int anGear)
 {
-	if(!mpEngine)
+	if(!apEngine)
 		return;
 
-	cGearbox *pGearbox = mpEngine->GetGearbox();
+	cGearbox *pGearbox = apEngine->GetGearbox();
 	
 	if(pGearbox)
 		pGearbox->SetGear(anGear);

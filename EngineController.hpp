@@ -5,18 +5,18 @@ class cEngine;
 class cEngineController final
 {
 public:
-	cEngineController(cEngine *apEngine);
+	cEngineController(/*cEngine *apEngine*/);
 	~cEngineController();
 	
-	void SetEngine(cEngine *apEngine){mpEngine = apEngine;}
-	cEngine *GetEngine() const {return mpEngine;}
+	//void SetEngine(cEngine *apEngine){mpEngine = apEngine;}
+	//cEngine *GetEngine() const {return mpEngine;}
 	
-	void StartEngine();
-	void StopEngine();
+	void StartEngine(cEngine *apEngine);
+	void StopEngine(cEngine *apEngine);
 	
-	void RevEngine(float afThrottle);
+	void RevEngine(cEngine *apEngine, float afThrottle);
 	
-	void SetGear(int anGear);
+	void SetGear(cEngine *apEngine, int anGear);
 private:
-	cEngine *mpEngine{nullptr};
+	//cEngine *mpEngine{nullptr};
 };

@@ -9,8 +9,10 @@ class cGearbox;
 class cEngine final
 {
 public:
-	cEngine(const string &asName, int anPistonCount, int anBaseHP);
+	cEngine(const string &asName, int anPistonCount, int anHorsePower);
 	~cEngine();
+	
+	void Update();
 	
 	void Reset();
 	
@@ -23,9 +25,10 @@ public:
 	
 	int GetPistonCount() const {return mnPistonCount;}
 	
-	int GetHP() const {return mnHP;}
-	int GetBaseHP() const {return mnBaseHP;}
+	int GetMaxHorsePower() const {return mnHorsePower;}
+	int GetCurrentHorsePower() const {return mnTorque * mnRPM / 5252;}
 	
+	int GetTorque() const {return mnTorque;}
 	int GetRPM() const {return mnRPM;}
 	
 	//void AddComponent(iEngineComponent *apComponent);
@@ -44,10 +47,8 @@ private:
 	
 	int mnPistonCount{0};
 	
-	int mnHP{0};
-	int mnBaseHP{0};
-	
-	int mnRevs{0};
+	int mnHorsePower{0};
+	int mnTorque{0};
 	int mnRPM{0};
 	
 	bool mbRunning{false};
