@@ -21,12 +21,12 @@ void cEngineController::StopEngine(cEngine *apEngine)
 	apEngine->Stop();
 };
 
-void cEngineController::RevEngine(cEngine *apEngine, float afThrottle)
+void cEngineController::RevEngine(cEngine *apEngine, float afThrottle, float afTime)
 {
 	if(!apEngine)
 		return;
 	
-	apEngine->Rev(afThrottle);
+	//apEngine->Rev(afThrottle);
 };
 
 void cEngineController::SetGear(cEngine *apEngine, int anGear)

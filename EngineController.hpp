@@ -14,7 +14,7 @@ public:
 	void StartEngine(cEngine *apEngine);
 	void StopEngine(cEngine *apEngine);
 	
-	void RevEngine(cEngine *apEngine, float afThrottle);
+	void RevEngine(cEngine *apEngine, float afThrottle, float afTime);
 	
 	void SetGear(cEngine *apEngine, int anGear);
 private:

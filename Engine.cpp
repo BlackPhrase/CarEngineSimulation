@@ -1,17 +1,20 @@
 #include "Engine.hpp"
 #include "Gearbox.hpp"
 
-cEngine::cEngine(const string &asName, int anPistonCount, int anHorsePower)
-	: msName(asName), mnPistonCount(anPistonCount), mnHorsePower(anHorsePower){}
+cEngine::cEngine(const string &asName, int anPistonCount, float afHorsePower)
+	: msName(asName), mnPistonCount(anPistonCount), mfHorsePower(afHorsePower){}
 cEngine::~cEngine() = default;
 
 void cEngine::Update()
 {
-	mnTorqueMax = mnTorque / mnRPM; //LookupTorqueCurve(mnRPM);
-	mnTorque = mfThrottle * mnTorqueMax;
+	mfTorqueMax = mfTorque / mnRPM; //LookupTorqueCurve(mnRPM);
+	mfTorque = mfThrottle * mfTorqueMax;
 	
-	if(mnRPM >= mnIdleRPM)
-		return;
+	//if(mnRPM >= mnIdleRPM)
+		//return;
+	
+	if(mpGearbox)
+		mpGearbox->ProvideTorque(mfTorque);
 };
 
 void cEngine::Reset()
@@ -33,16 +36,13 @@ void cEngine::Stop()
 		mbRunning = false;
 };
 
-bool cEngine::Rev(float afThrottle)
+void cEngine::SetThrottle(float afThrottle)
 {
-	if(!mbRunning)
-		return false;
-	
 	if(afThrottle < 0.0f)
 		afThrottle = 0.0f;
 	
 	if(afThrottle > 1.0f)
 		afThrottle = 1.0f;
 	
-	return true;
+	mfThrottle = afThrottle;
 };

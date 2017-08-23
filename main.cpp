@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 	
 	while(Engine.IsRunning())
 	{
-		Controller.RevEngine(&Engine, 1.0f);
+		Controller.RevEngine(&Engine, 1.0f, 5.0f);
 	};
 	
 	Controller.StopEngine(&Engine);

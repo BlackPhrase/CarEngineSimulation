@@ -9,7 +9,7 @@ class cGearbox;
 class cEngine final
 {
 public:
-	cEngine(const string &asName, int anPistonCount, int anHorsePower);
+	cEngine(const string &asName, int anPistonCount, float anHorsePower);
 	~cEngine();
 	
 	void Update();
@@ -19,16 +19,17 @@ public:
 	bool Start();
 	void Stop();
 	
-	bool Rev(float afThrottle);
-	
 	const string &GetName() const {return msName;}
 	
 	int GetPistonCount() const {return mnPistonCount;}
 	
-	int GetMaxHorsePower() const {return mnHorsePower;}
-	int GetCurrentHorsePower() const {return mnTorque * mnRPM / 5252;}
+	float GetMaxHorsePower() const {return mfHorsePower;}
+	float GetCurrentHorsePower() const {return mfTorque * mnRPM / 5252;}
 	
-	int GetTorque() const {return mnTorque;}
+	void SetThrottle(float afThrottle);
+	float GetThrottle() const {return mfThrottle;}
+	
+	float GetTorque() const {return mfTorque;}
 	int GetRPM() const {return mnRPM;}
 	
 	//void AddComponent(iEngineComponent *apComponent);
@@ -45,11 +46,12 @@ private:
 	
 	cGearbox *mpGearbox{nullptr};
 	
-	int mnPistonCount{0};
+	float mfHorsePower{0.0f};
+	float mfThrottle{0.0f};
+	float mfTorque{0.0f};
 	
-	int mnHorsePower{0};
-	int mnTorque{0};
 	int mnRPM{0};
+	int mnPistonCount{0};
 	
 	bool mbRunning{false};
 };
