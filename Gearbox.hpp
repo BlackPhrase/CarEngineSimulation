@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+#include "EngineComponent.hpp"
+
 struct sGearboxGear
 {
 	sGearboxGear(float afRatio) : fRatio(afRatio){}
@@ -12,7 +14,7 @@ struct sGearboxGear
 
 using tGearboxGearVec = std::vector<std::unique_ptr<sGearboxGear>>;
 
-class cGearbox final
+class cGearbox final : public iEngineComponent
 {
 public:
 	cGearbox(tGearboxGearVec &avGears);

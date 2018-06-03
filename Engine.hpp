@@ -1,8 +1,12 @@
 #pragma once
 
+#include <vector>
 #include <string>
 
 using string = std::string;
+
+class iEngineComponent;
+using tEngineComponentVec = std::vector<iEngineComponent*>;
 
 class cGearbox;
 
@@ -32,16 +36,29 @@ public:
 	float GetTorque() const {return mfTorque;}
 	int GetRPM() const {return mnRPM;}
 	
-	//void AddComponent(iEngineComponent *apComponent);
+	void AddComponent(iEngineComponent *apComponent)
+	{
+		if(apComponent)
+			mvComponents.push_back(apComponent);
+	};
 	
-	//template<typename T>
-	//T *GetComponent() const;
+	template<typename T>
+	T *GetComponent() const
+	{
+		for(auto It : mvComponents)
+			if(It->GetType() == T.GetType())
+				return dynamic_cast<T>(It);
+		
+		return nullptr;
+	};
 	
 	void SetGearbox(cGearbox *apGearbox){mpGearbox = apGearbox;}
 	cGearbox *GetGearbox() const {return mpGearbox;}
 	
 	bool IsRunning() const {return mbRunning;}
 private:
+	tEngineComponentVec mvComponents;
+	
 	string msName{""};
 	
 	cGearbox *mpGearbox{nullptr};
